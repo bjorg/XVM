@@ -1,0 +1,14 @@
+process {
+	System$Console_class con = new System$Console_class;
+	VoidPort r = new VoidPort;
+	.con(Write["Enter your name: ", r]);
+	r(void);
+	StringPort s = new StringPort;
+	.con(ReadLine[s]);
+	s(string v);
+	.con(Write["Your name is ", r]);
+	r(void);
+	.con(WriteLine[v, r]);
+	r(void);
+}
+

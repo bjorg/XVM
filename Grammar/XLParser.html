@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>Grammar xl.g</TITLE>
+</HEAD>
+<BODY>
+<table summary="" border="1" cellpadding="5">
+<tr>
+<td>
+<font size="+2">Grammar XLParser</font><br>
+<a href="http://www.ANTLR.org">ANTLR</a>-generated HTML file from xl.g
+<p>
+Terence Parr, <a href="http://www.magelang.com">MageLang Institute</a>
+<br>ANTLR Version 2.7.2; 1989-1999
+</td>
+</tr>
+</table>
+<PRE>
+
+Definition of parser XLParser, which is a subclass of LLkParser.
+
+
+<a name="main">main</a>
+	:	(	<a href="XLParser.html#process_definition">process_definition</a> 
+		|	<a href="XLParser.html#schema_definition">schema_definition</a> 
+		)+ 
+		EOF 
+	;
+
+
+<a name="process_definition">process_definition</a>
+	:	KW_PROCESS <a href="XLParser.html#name">name</a> LPAREN <a href="XLParser.html#pattern">pattern</a> RPAREN <a href="XLParser.html#process_statement">process_statement</a> 
+	;
+
+
+<a name="schema_definition">schema_definition</a>
+	:	KW_SCHEMA <a href="XLParser.html#name">name</a> ASSIGN <a href="XLParser.html#schema">schema</a> SEMI 
+	;
+
+
+<a name="name">name</a>
+	:	ID 
+	;
+
+
+<a name="pattern">pattern</a>
+	:	<a href="XLParser.html#pattern_unordered">pattern_unordered</a> 
+	;
+
+
+<a name="process_statement">process_statement</a>
+	:	LCURLY <a href="XLParser.html#statement_list">statement_list</a> RCURLY 
+	;
+
+
+<a name="schema">schema</a>
+	:	<a href="XLParser.html#schema_unordered">schema_unordered</a> 
+	;
+
+
+<a name="tag">tag</a>
+	:	ID 
+	;
+
+
+<a name="value">value</a>
+	:	<a href="XLParser.html#value_unordered">value_unordered</a> 
+	|	
+	;
+
+
+<a name="value_unordered">value_unordered</a>
+	:	<a href="XLParser.html#value_ordered">value_ordered</a> ( PAR <a href="XLParser.html#value_ordered">value_ordered</a> )* 
+	;
+
+
+<a name="value_ordered">value_ordered</a>
+	:	<a href="XLParser.html#value_simple">value_simple</a> ( COMMA <a href="XLParser.html#value_simple">value_simple</a> )* 
+	;
+
+
+<a name="value_simple">value_simple</a>
+	:	<a href="XLParser.html#value_literal">value_literal</a> 
+	|	<a href="XLParser.html#value_element">value_element</a> 
+	|	<a href="XLParser.html#value_new">value_new</a> 
+	|	<a href="XLParser.html#value_variable">value_variable</a> 
+	;
+
+
+<a name="value_literal">value_literal</a>
+	:	<a href="XLParser.html#value_boolean">value_boolean</a> 
+	|	<a href="XLParser.html#value_floating_point">value_floating_point</a> 
+	|	<a href="XLParser.html#value_integer">value_integer</a> 
+	|	<a href="XLParser.html#value_character">value_character</a> 
+	|	<a href="XLParser.html#value_string">value_string</a> 
+	;
+
+
+<a name="value_element">value_element</a>
+	:	<a href="XLParser.html#tag">tag</a> LSQUARE <a href="XLParser.html#value">value</a> RSQUARE 
+	;
+
+
+<a name="value_new">value_new</a>
+	:	KW_NEW <a href="XLParser.html#schema_name">schema_name</a> 
+	;
+
+
+<a name="value_variable">value_variable</a>
+	:	<a href="XLParser.html#name">name</a> 
+	;
+
+
+<a name="schema_name">schema_name</a>
+	:	KW_BOOL 
+	|	KW_INT 
+	|	KW_FLOAT 
+	|	KW_CHAR 
+	|	KW_STRING 
+	|	<a href="XLParser.html#schema_ref">schema_ref</a> 
+	;
+
+
+<a name="value_boolean">value_boolean</a>
+	:	KW_TRUE 
+	|	KW_FALSE 
+	;
+
+
+<a name="value_floating_point">value_floating_point</a>
+	:	INT DOT 
+		(	INT 
+		|	
+		) 
+	;
+
+
+<a name="value_integer">value_integer</a>
+	:	INT 
+	;
+
+
+<a name="value_character">value_character</a>
+	:	CHAR_LITERAL 
+	;
+
+
+<a name="value_string">value_string</a>
+	:	STRING_LITERAL 
+	;
+
+
+<a name="pattern_unordered">pattern_unordered</a>
+	:	<a href="XLParser.html#pattern_ordered">pattern_ordered</a> ( PAR <a href="XLParser.html#pattern_ordered">pattern_ordered</a> )* 
+	;
+
+
+<a name="pattern_ordered">pattern_ordered</a>
+	:	<a href="XLParser.html#pattern_simple">pattern_simple</a> ( COMMA <a href="XLParser.html#pattern_simple">pattern_simple</a> )* 
+	;
+
+
+<a name="pattern_simple">pattern_simple</a>
+	:	<a href="XLParser.html#pattern_void">pattern_void</a> 
+	|	<a href="XLParser.html#pattern_element">pattern_element</a> 
+	|	<a href="XLParser.html#pattern_discard">pattern_discard</a> 
+	|	<a href="XLParser.html#pattern_variable">pattern_variable</a> 
+	|	LPAREN <a href="XLParser.html#pattern">pattern</a> RPAREN 
+	;
+
+
+<a name="pattern_void">pattern_void</a>
+	:	KW_VOID 
+	;
+
+
+<a name="pattern_element">pattern_element</a>
+	:	<a href="XLParser.html#tag">tag</a> LSQUARE <a href="XLParser.html#pattern">pattern</a> RSQUARE 
+	;
+
+
+<a name="pattern_discard">pattern_discard</a>
+	:	<a href="XLParser.html#schema_name">schema_name</a> FLAT 
+	;
+
+
+<a name="pattern_variable">pattern_variable</a>
+	:	<a href="XLParser.html#schema_name">schema_name</a> <a href="XLParser.html#name">name</a> 
+	;
+
+
+<a name="schema_unordered">schema_unordered</a>
+	:	<a href="XLParser.html#schema_choice">schema_choice</a> ( PAR <a href="XLParser.html#schema_choice">schema_choice</a> )* 
+	;
+
+
+<a name="schema_choice">schema_choice</a>
+	:	<a href="XLParser.html#schema_repeat">schema_repeat</a> ( PLUS <a href="XLParser.html#schema_repeat">schema_repeat</a> )* 
+	;
+
+
+<a name="schema_repeat">schema_repeat</a>
+	:	<a href="XLParser.html#schema_ordered">schema_ordered</a> 
+		(	STAR 
+		|	
+		) 
+	;
+
+
+<a name="schema_ordered">schema_ordered</a>
+	:	<a href="XLParser.html#schema_simple">schema_simple</a> ( COMMA <a href="XLParser.html#schema_simple">schema_simple</a> )* 
+	;
+
+
+<a name="schema_simple">schema_simple</a>
+	:	<a href="XLParser.html#schema_element">schema_element</a> 
+	|	<a href="XLParser.html#schema_name">schema_name</a> 
+	|	LPAREN <a href="XLParser.html#schema">schema</a> RPAREN 
+	;
+
+
+<a name="schema_element">schema_element</a>
+	:	<a href="XLParser.html#tag">tag</a> LSQUARE <a href="XLParser.html#schema">schema</a> RSQUARE 
+	;
+
+
+<a name="schema_ref">schema_ref</a>
+	:	ID 
+	;
+
+
+<a name="statement_list">statement_list</a>
+	:	( <a href="XLParser.html#statement">statement</a> )* 
+	;
+
+
+<a name="statement">statement</a>
+	:	<a href="XLParser.html#receive_statement">receive_statement</a> SEMI 
+	|	<a href="XLParser.html#fork_receive_statement">fork_receive_statement</a> 
+	|	<a href="XLParser.html#send_or_call_statement">send_or_call_statement</a> SEMI 
+	|	<a href="XLParser.html#switch_statement">switch_statement</a> 
+	|	<a href="XLParser.html#fork_statement">fork_statement</a> 
+	|	<a href="XLParser.html#fork_send_or_call_statement">fork_send_or_call_statement</a> SEMI 
+	|	<a href="XLParser.html#select_statement">select_statement</a> 
+	|	<a href="XLParser.html#if_statement">if_statement</a> 
+	|	<a href="XLParser.html#let_statement">let_statement</a> SEMI 
+	;
+
+
+<a name="receive_statement">receive_statement</a>
+	:	<a href="XLParser.html#name">name</a> LPAREN <a href="XLParser.html#pattern">pattern</a> RPAREN 
+	;
+
+
+<a name="fork">fork</a>
+	:	KW_FORK 
+	|	DOT 
+	;
+
+
+<a name="fork_receive_statement">fork_receive_statement</a>
+	:	<a href="XLParser.html#fork">fork</a> <a href="XLParser.html#name">name</a> LPAREN <a href="XLParser.html#pattern">pattern</a> RPAREN LCURLY <a href="XLParser.html#statement_list">statement_list</a> RCURLY 
+	;
+
+
+<a name="send_or_call_statement">send_or_call_statement</a>
+	:	<a href="XLParser.html#name">name</a> LPAREN <a href="XLParser.html#value">value</a> RPAREN 
+	;
+
+
+<a name="switch_statement">switch_statement</a>
+	:	<a href="XLParser.html#fork">fork</a> KW_SWITCH LPAREN <a href="XLParser.html#value">value</a> RPAREN LCURLY ( <a href="XLParser.html#switch_case">switch_case</a> )* RCURLY 
+	;
+
+
+<a name="fork_statement">fork_statement</a>
+	:	<a href="XLParser.html#fork">fork</a> <a href="XLParser.html#process_statement">process_statement</a> 
+	;
+
+
+<a name="fork_send_or_call_statement">fork_send_or_call_statement</a>
+	:	<a href="XLParser.html#fork">fork</a> <a href="XLParser.html#name">name</a> LPAREN <a href="XLParser.html#value">value</a> RPAREN 
+	;
+
+
+<a name="select_statement">select_statement</a>
+	:	KW_SELECT LCURLY ( <a href="XLParser.html#fork_receive_statement">fork_receive_statement</a> )* RCURLY 
+	;
+
+
+<a name="if_statement">if_statement</a>
+	:	KW_IF LPAREN <a href="XLParser.html#value">value</a> RPAREN <a href="XLParser.html#fork">fork</a> <a href="XLParser.html#process_statement">process_statement</a> KW_ELSE <a href="XLParser.html#fork">fork</a> <a href="XLParser.html#process_statement">process_statement</a> 
+	;
+
+
+<a name="let_statement">let_statement</a>
+	:	<a href="XLParser.html#pattern">pattern</a> ASSIGN <a href="XLParser.html#value">value</a> 
+	;
+
+
+<a name="switch_case">switch_case</a>
+	:	KW_CASE <a href="XLParser.html#pattern">pattern</a> COLON ( <a href="XLParser.html#statement">statement</a> )* 
+	;
+
+</PRE>
+</BODY>
+</HTML>

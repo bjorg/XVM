@@ -1,0 +1,82 @@
+process quicksort(port in, port out) {
+	port input_sync = new port;
+	port output_sync = new port;
+	.quicksort_internal(in, out, input_sync, output_sync);
+}
+
+process quicksort_internal(port in, port out, port input_sync, port output_sync) {
+	select {
+		.in(void) {
+			out(reply2);
+			.quicksort_internal(in, out, input_sync, output_sync);
+		}
+		.in(var pivot) {
+			port sync_pipeline = new port;
+			port pipeline_sync = new port;
+			.x_pipe_head(in, input_sync, sync_pipeline);
+			.input_sync(void) {
+				.quicksort_internal(in, out, input_sync, output_sync);
+			}
+			.x_qs_pipeline(sync_pipeline, pivot, pipeline_sync);
+			.output_sync(void) {
+				.x_pipe_head(pipeline_sync, output_sync, out);
+			}
+		}
+	}
+	.output_sync();
+}
+
+process x_qs_pipeline(port in, var pivot, port out) {
+	port dup_filter_less = new port;
+	port dup_filter_equal = new port;
+	port dup_filter_greater = new port;
+	port filter_less_sort = new port;
+	port filter_equal_append = new port;
+	port filter_greater_sort = new port;
+	port sort_less_append = new port;
+	port sort_greater_append = new port;
+	fork {
+		dup_filter_equal(pivot);
+		.x_dup_3(in, dup_filter_less, dup_filter_equal, dup_filter_greater);
+	}
+	.x_qs_filter(dup_filter_less, pivot, x_less, filter_less_sort);
+	.x_qs_filter(dup_filter_equal, pivot, x_equal, fitler_equal_append);
+	.x_qs_filter(dup_filter_greater, pivot, x_greater, filter_greater_sort);
+	.x_quicksort(filter_less_sort, sort_less_append);
+	.x_quicksort(filter_greater_sort, sort_greater_append);
+	.x_append_3(sort_less_append, filter_equal_append, sort_greater_append, out);
+}
+
+process x_qs_filter(port in, var pivot, port predicate, port out) {
+	port filter_in = new port;
+	port filter_out = new port;
+	.x_qs_filter_internal1(in, pivot, predicate, out, filter_in, filter_out);
+	.x_filter(filter_in, predicate, filter_out);
+	.x_qs_filter_internal2(in, pivot, predicate, out, filter_in, filter_out);
+}
+
+process x_qs_filter_internal1(port in, var pivot, port predicate, port out, port filter_in, port filter_out) {
+	select {
+		.in(var value) {
+			filter_in(value, pivot);
+			.x_qs_filter_internal1(in, pivot, predicate, out, filter_in, filter_out);
+		}
+		.in(void) {
+			filter_in();
+			.x_qs_filter_internal1(in, pivot, predicate, out, filter_in, filter_out);
+		}
+	}
+}
+
+process x_qs_filter_internal2(port in, var pivot, port predicate, port out, port filter_in, port filter_out) {
+	select {
+		.filter_out(var value, var pivot) {
+			out(value);
+			.x_qs_filter_internal2(in, pivot, predicate, out, filter_in, filter_out);
+		}
+		.filter_out(void) {
+			out();
+			.x_qs_filter_internal2(in, pivot, predicate, out, filter_in, filter_out);
+		}
+	}
+}

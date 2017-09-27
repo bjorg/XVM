@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.00"
+	Name="Grammar"
+	ProjectGUID="{5FD8D47C-9613-439F-AA86-355209E5E1D8}"
+	Keyword="MakeFileProj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug|Win32"
+			OutputDirectory="Debug"
+			IntermediateDirectory="Debug"
+			ConfigurationType="0">
+			<Tool
+				Name="VCNMakeTool"
+				BuildCommandLine="nmake.exe"
+				ReBuildCommandLine="nmake.exe rebuild"
+				CleanCommandLine="nmake.exe clean"/>
+		</Configuration>
+		<Configuration
+			Name="Release|Win32"
+			OutputDirectory="Release"
+			IntermediateDirectory="Release"
+			ConfigurationType="0">
+			<Tool
+				Name="VCNMakeTool"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+		<File
+			RelativePath="makefile">
+		</File>
+		<File
+			RelativePath="xl-lex.g">
+		</File>
+		<File
+			RelativePath="xl.g">
+		</File>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>

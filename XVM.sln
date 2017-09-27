@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XVM", "XVM.csproj", "{E9702745-BC3D-4B60-A255-92A90188128A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Grammar", "Grammar\XGrammar.vcproj", "{5FD8D47C-9613-439F-AA86-355209E5E1D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+		{E9702745-BC3D-4B60-A255-92A90188128A}.0 = {5FD8D47C-9613-439F-AA86-355209E5E1D8}
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{E9702745-BC3D-4B60-A255-92A90188128A}.Debug.ActiveCfg = Debug|.NET
+		{E9702745-BC3D-4B60-A255-92A90188128A}.Debug.Build.0 = Debug|.NET
+		{E9702745-BC3D-4B60-A255-92A90188128A}.Release.ActiveCfg = Release|.NET
+		{E9702745-BC3D-4B60-A255-92A90188128A}.Release.Build.0 = Release|.NET
+		{5FD8D47C-9613-439F-AA86-355209E5E1D8}.Debug.ActiveCfg = Debug|Win32
+		{5FD8D47C-9613-439F-AA86-355209E5E1D8}.Debug.Build.0 = Debug|Win32
+		{5FD8D47C-9613-439F-AA86-355209E5E1D8}.Release.ActiveCfg = Release|Win32
+		{5FD8D47C-9613-439F-AA86-355209E5E1D8}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
